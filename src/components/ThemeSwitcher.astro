@@ -1,0 +1,89 @@
+---
+import { Icon } from "astro-icon"
+
+---
+<div class="theme-switcher w-fit flex items-center justify-between border border-solid border-gray-400 dark:border-gray-700 rounded-full p-1" role="radiogroup">
+    <button
+        data-target-theme="light"
+        data-active="false"
+        role="radio"
+        type="button"
+    >
+        <Icon
+            name="ph:sun-fill"
+        />
+    </button>
+    <button
+        data-target-theme="system"
+        data-active="false"
+        role="radio"
+        type="button"
+    >
+        <Icon
+            name="ic:baseline-monitor"
+        />
+    </button>
+    <button
+        data-target-theme="dark"
+        data-active="false"
+        role="radio"
+        type="button"
+    >
+        <Icon
+            name="ic:baseline-dark-mode"
+        />
+    </button>
+</div>
+
+<script>
+    const themeButtons = document.querySelectorAll<HTMLButtonElement>(".theme-switcher button");
+
+    themeButtons.forEach((button: HTMLButtonElement) => {
+        button.addEventListener("click", () => {
+            let root = document.documentElement;
+            let rootClassList = root.classList;
+            let theme = button.dataset.targetTheme ?? "system";
+
+            rootClassList.remove("dark-theme", "light-theme");
+
+            if (theme == "system") {
+                let mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+                if (mediaQuery.matches) {
+                    rootClassList.add("dark-theme");
+                } else {
+                    rootClassList.add("light-theme");
+                }
+            } else {
+                rootClassList.add(theme === "dark" ? "dark-theme" : "light-theme");
+            }
+            
+            localStorage.setItem("theme", theme);
+            root.setAttribute("data-theme", theme);
+
+            themeButtons.forEach((button: HTMLButtonElement) => {
+                button.setAttribute("data-active", button.dataset.targetTheme === theme ? "true" : "false");
+            });
+        });
+    });
+
+    let theme = document.documentElement.dataset.theme ?? "system";
+    themeButtons.forEach((button: HTMLButtonElement) => {
+        button.setAttribute("data-active", button.dataset.targetTheme === theme ? "true" : "false");
+    });
+</script>
+
+<style>
+    .theme-switcher button {
+        @apply w-8 h-8 flex items-center justify-center rounded-full;
+    }
+
+    .theme-switcher button svg {
+        @apply w-6 h-6;
+    }
+
+    .theme-switcher button[data-active="true"] {
+        @apply bg-gray-300 dark:bg-gray-700;
+    }
+
+</style>

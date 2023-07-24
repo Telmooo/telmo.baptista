@@ -1,0 +1,75 @@
+---
+import { Icon } from "astro-icon"
+---
+
+<div class="border-t border-solid border-gray-300 dark:border-gray-800">
+    <footer class="max-w-7xl w-full mx-auto py-8 px-4">
+        <div class="flex flex-row items-center justify-center gap-16">
+            <div class="footer-logo aspect-square max-h-32 w-auto h-full flex self-start">
+                <img src="/favicon.png" alt="Kitsune" width="552" height="552">
+            </div>
+            <div class="flex flex-col">
+                <h2 class="text-4xl mb-8 p-2 font-bold">Telmo Baptista</h2>
+                <div class="footer-grid flex flex-row justify-between gap-32 flex-wrap p-2">
+                    <div>
+                        <h4>Navigation</h4>
+                        <a href="/projects">Projects</a>
+                        <a href="/music">Music</a>
+                        <a href="/gaming">Gaming</a>
+                        <a href="/series">Series & Movies</a>
+                        <a href="/resume">Resume</a>
+                    </div>
+                    <div class="contacts">
+                        <h4>Contacts</h4>
+                        <a
+                            href="https://github.com/Telmooo"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <Icon name="mdi:github" class="w-6 h-6" />
+                            Telmooo
+                        </a>
+                        <a
+                            href="https://www.linkedin.com/in/telmooo/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <Icon name="mdi:linkedin" class="w-6 h-6" />
+                            telmooo
+                        </a>
+                        <a
+                            href="mailto:telmooo.dev@gmail.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <Icon name="ic:outline-email" class="w-6 h-6" />
+                            Email me
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="text-sm text-gray-950/80 dark:text-gray-300/80">&copy; {new Date().getFullYear()} Telmo Baptista</p>
+    </footer>
+</div>
+
+<style>
+    .footer-logo img {
+        -webkit-filter: drop-shadow(1px 1px 0 )
+                  drop-shadow(-1px -1px 0 #666);
+        filter: drop-shadow(1px 1px 0 #666) 
+                drop-shadow(-1px -1px 0 #666);
+    }
+
+    .footer-grid h4 {
+        @apply mb-4 text-sm font-medium;
+    }
+
+    .footer-grid a {
+        @apply block w-fit mb-2;
+    }
+
+    .contacts a {
+        @apply flex items-center gap-2;
+    }
+</style>

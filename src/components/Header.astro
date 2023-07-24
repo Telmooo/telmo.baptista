@@ -1,0 +1,80 @@
+---
+import { Icon } from "astro-icon";
+
+import ThemeSwitcher from "./ThemeSwitcher.astro";
+---
+
+<header class="sticky h-16 top-0 w-full flex flex-col items-center justify-around px-6">
+    <nav class="h-full w-full max-w-7xl relative flex flex-1 items-center justify-between">
+        <div class="flex flex-row gap-8 items-center">
+            <a href="/" class="logo h-12 w-12 relative">
+                <img src="/favicon.png" alt="Kitsune" width="552" height="552">
+            </a>
+            <div class="routes flex flex-row gap-6 items-center">
+                <a href="/projects">Projects</a>
+                <a href="/music">Music</a>
+                <a href="/gaming">Gaming</a>
+                <a href="/series">Series & Movies</a>
+            </div>
+        </div>
+        <div class="flex flex-row gap-6 items-center">
+            <div class="socials flex flex-row gap-1 items-center">
+                <a
+                    href="https://github.com/Telmooo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="h-8 w-8"
+                >
+                    <Icon name="mdi:github" />
+                </a>
+                <a
+                    href="https://www.linkedin.com/in/telmooo/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="h-8 w-8"
+                >
+                    <Icon name="mdi:linkedin" />
+                </a>
+            </div>
+            <ThemeSwitcher />
+        </div>
+    </nav>
+</header>
+
+<style>
+    header {
+        z-index: 2000;
+        @apply shadow;
+        @apply shadow-gray-300;
+        background: none;
+        backdrop-filter: saturate(150%) blur(2px);
+        background: hsla(0%, 0%, 100%, 0.8);
+    }
+
+    :global(.dark-theme) header {
+        @apply shadow-gray-800;
+    }
+
+    .routes a {
+        @apply hover:underline;
+    }
+
+    .logo img {
+        -webkit-filter: drop-shadow(1px 1px 0 )
+                  drop-shadow(-1px -1px 0 #666);
+        filter: drop-shadow(1px 1px 0 #666) 
+                drop-shadow(-1px -1px 0 #666);
+    }
+    
+    .logo::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: -16px;
+        border-right: 1px solid transparent;
+        @apply border-gray-400 dark:border-gray-600;
+    }
+
+
+</style>
