@@ -1,0 +1,267 @@
+---
+import { Icon } from "astro-icon";
+
+import "../styles/resume.css";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="My resume... in a website.">
+		<meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} /> 
+		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+        <title>Resume | Telmo Baptista</title>
+    </head>
+    <body>
+        <main>
+            <section>
+                <h1>Telmo Baptista</h1>
+                <dl class="flex gap-1 items-center">
+                    <div>
+                        <dt><Icon name="ic:outline-email" class="w-5 h-5" /></dt>
+                        <dd>
+                            <a href="mailto:telmooo.dev@gmail.com">
+                                telmooo.dev@gmail.com
+                            </a>
+                        </dd>
+                    </div>
+                    <div>
+                        <dt><Icon name="ic:outline-phone" class="w-5 h-5" /></dt>
+                        <dd>
+                            <a href="tel:+351 937356081">
+                                (+351) 937356081
+                            </a>
+                        </dd>
+                    </div>
+                    <div>
+                        <dt><Icon name="mdi:location" class="w-5 h-5" /></dt>
+                        <dd>
+                            <a
+                                href="https://www.google.com/maps/place/Valbom/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Valbom
+                            </a>
+                        </dd>
+                    </div>
+                    <div>
+                        <dt><Icon name="mdi:web" class="w-5 h-5" /></dt>
+                        <dd>
+                            <a href="https://telmooo.vercel.app"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                telmooo.vercel.app
+                            </a>
+                        </dd>
+                    </div>
+                    <div>
+                        <dt><Icon name="mdi:linkedin" class="w-5 h-5" /></dt>
+                        <dd>
+                            <a href="https://www.linkedin.com/in/telmooo/"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                telmooo
+                            </a>
+                        </dd>
+                    </div>
+                    <div>
+                        <dt><Icon name="mdi:github" class="w-5 h-5" /></dt>
+                        <dd>
+                            <a href="https://github.com/Telmooo"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                Telmooo
+                            </a>
+                        </dd>
+                    </div>
+                </dl>
+            </section>
+            <section id="experience">
+                <h2>Experience</h2>
+                <ul>
+                    <li>
+                        <div class="item-title">
+                            <h3>Machine Learning Researcher</h3>
+                            <span>Fraunhofer Portugal AICOS</span>
+                        </div>
+                        <div class="item-duration">
+                            <span>Feb 2023</span>
+                            <span>Jul 2023</span>
+                            <span>Full-time</span>
+                            <span>Porto, Portugal</span>
+                        </div>
+                        <div class="item-details">
+                            <span>MSc Dissertation on Federated Learning for Glaucoma Diagnosis using Fundus Images.</span>
+                            <div class="inline-listing">
+                                <span><strong>Skills:</strong></span>
+                                <ul>
+                                    <li>Federated Learning</li>
+                                    <li>Python</li>
+                                    <li>TensorFlow</li>
+                                    <li>Deep Learning</li>
+                                    <li>Machine Learning</li>
+                                    <li>Computer Vision</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-title">
+                            <h3>Research Grants</h3>
+                            <span>Fraunhofer Portugal AICOS</span>
+                        </div>
+                        <div class="item-duration">
+                            <span>Jul 2022</span>
+                            <span>Oct 2022</span>
+                            <span>Internship</span>
+                            <span>Porto, Portugal</span>
+                        </div>
+                        <div class="item-details">
+                            <span>Investigation and development of computer-aided glaucoma diagnosis and retinal layer segmentation.</span>
+                            <div class="inline-listing">
+                                <span><strong>Skills:</strong></span>
+                                <ul>
+                                    <li>Computer Vision</li>
+                                    <li>Image Processing</li>
+                                    <li>Python</li>
+                                    <li>OpenCV</li>
+                                    <li>Machine Learning</li>
+                                    <li>PyTorch</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <section id="education">
+                <h2>Education</h2>
+                <ul>
+                    <li>
+                        <div class="item-title">
+                            <h3>Faculdade de Engenharia da Universidade do Porto</h3>
+                            <span>MEng. in Informatics and Computing Engineering</span>
+                        </div>
+                        <div class="item-duration">
+                            <span>Sep 2018</span>
+                            <span>Jul 2023</span>
+                            <span>Porto, Portugal</span>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <section id="projects">
+                <h2>Projects</h2>
+                <ul>
+                    <li>
+                        <div class="item-title">
+                            <h3>Traffic Signifier</h3>
+                            <span>
+                                <a
+                                    href="https://github.com/Telmooo/traffic-signifier/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <Icon name="mdi:github" class="w-4 h-4" />
+                                    traffic-signifier
+                                </a>
+                            </span>
+                        </div>
+                        <div class="item-details">
+                            <span>Project developed for Computer Vision course in the year 2021/2022.</span>
+                            <ul>
+                                <li>Built a traffic sign classification and detection system using classical computer vision techniques with <strong>OpenCV</strong>.</li>
+                                <li>Built a traffic sign classification and detection models using deep learning techniques with <strong>PyTorch</strong>.</li>
+                            </ul>
+                            <div class="inline-listing">
+                                <span><strong>Skills:</strong></span>
+                                <ul>
+                                    <li>Computer Vision</li>
+                                    <li>Image Processing</li>
+                                    <li>Python</li>
+                                    <li>OpenCV</li>
+                                    <li>Deep Learning</li>
+                                    <li>PyTorch</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-title">
+                            <h3>Redstone Tools</h3>
+                            <span>
+                                <a
+                                    href="https://github.com/Telmooo/Redstone-Tools/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <Icon name="mdi:github" class="w-4 h-4" />
+                                    Redstone-Tools
+                                </a>
+                            </span>
+                        </div>
+                        <div class="item-details">
+                            <span>Project developed for Object Oriented Programming course in the year 2019/2020.</span>
+                            <ul>
+                                <li>Built a simulator interface that emulates Minecraft's vanilla redstone circuits with additional mechanics from various Minecraft Mods using <strong>Java</strong>.</li>
+                                <li>Applied proper <strong>OOP design patterns</strong> and adequate <strong>unit</strong>, <strong>integration</strong> and <strong>system</strong> testing.</li>
+                            </ul>
+                            <div class="inline-listing">
+                                <span><strong>Skills:</strong></span>
+                                <ul>
+                                    <li>Java</li>
+                                    <li>Object Oriented Programming (OOP)</li>
+                                    <li>Testing</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <section id="skills">
+                <h2>Skills</h2>
+                <ul>
+                    <li>
+                        <h3>Languages</h3>
+                        <ul>
+                            <li>Python</li>
+                            <li>JavaScript</li>
+                            <li>TypeScript</li>
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>Java</li>
+                            <li>C++</li>
+                            <li>SQL</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>Frameworks and Libraries</h3>
+                        <ul>
+                            <li>PyTorch</li>
+                            <li>TensorFlow</li>
+                            <li>Pandas</li>
+                            <li>OpenCV</li>
+                            <li>React</li>
+                            <li>Next.js</li>
+                            <li>Astro</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>Tools</h3>
+                        <ul>
+                            <li>Git</li>
+                            <li>GitHub</li>
+                            <li>Poetry</li>
+                            <li>Cookiecutter</li>
+                            <li>Yarn</li>
+                            <li>PostgreSQL</li>
+                            <li>MongoDB</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </main>
+    </body>
+</html>
