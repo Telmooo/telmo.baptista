@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+    height: 100%;
+}
+
+main {
+    @apply flex flex-col mx-auto w-[210mm] p-12;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: revert;
+    font-weight: revert;
+}
+
+dl > div {
+    @apply flex flex-row items-center gap-1;
+    @apply text-xs;
+}
+
+section > h2 {
+    @apply mt-2 border-b;
+}
+
+.inline-listing {
+    @apply flex flex-row gap-1 text-base;
+}
+
+.inline-listing > ul {
+    @apply flex flex-row;
+}
+
+.inline-listing > ul > li:not(:first-child)::before {
+    content: "·";
+    @apply mx-0.5;
+}
+
+#experience .item-title,
+#projects .item-title {
+    @apply flex flex-row items-center;
+}
+
+#experience .item-title > span::before,
+#projects .item-title > span::before {
+    content: "·";
+    @apply mx-1;
+}
+
+#experience .item-duration, #education .item-duration {
+    @apply text-sm;
+}
+
+#experience .item-duration > span:nth-child(2)::before,
+#education .item-duration > span:nth-child(2)::before {
+    content: "-";
+    @apply mx-0.5;
+}
+
+#experience .item-duration > span:nth-last-child(-n + 2):before,
+#education .item-duration > span:last-child:before {
+    content: "·";
+    @apply mx-1;
+}
+
+#projects .item-title > span,
+#projects .item-title > span > a {
+    @apply flex flex-row items-center;
+}
+
+#projects .item-title > span > a {
+    @apply gap-1;
+}
+
+#projects .item-details > ul {
+    @apply list-disc list-inside my-1 text-sm;
+}
+
+#projects > ul > li {
+    @apply mb-2;
+}
+
+#skills > ul > li > ul {
+    @apply flex flex-row items-center;
+}
+
+#skills > ul > li > ul > li:not(:first-child)::before {
+    content: "·";
+    @apply mx-1;
+}

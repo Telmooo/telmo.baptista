@@ -1,0 +1,49 @@
+---
+import { Icon } from "astro-icon";
+
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<div class="max-w-7xl w-max mx-auto flex flex-col gap-4 items-center justify-center py-96">
+        <h2 class="text-9xl font-black tracking-wider">
+            <span>4</span><span>0</span><span>4</span>
+        </h2>
+        <img src="/404.gif" alt="404 Not Found" width="320" height="240">
+        <a id="go-back-anchor" href="/">
+            Go back <Icon name="ic:baseline-keyboard-arrow-right" class="w-16" />
+        </a>
+	</div>
+</Layout>
+
+<script>
+    let anchor = document.getElementById('go-back-anchor') as HTMLAnchorElement | null;
+    if (anchor) {
+        anchor.href = (document.referrer.indexOf(window.location.host) !== -1) ? document.referrer : '/';
+    }
+</script>
+
+<style>
+    h2 span {
+        @apply text-purple-800 dark:text-gray-200;
+    }
+
+    h2 :nth-child(odd) {
+        @apply text-gray-700 dark:text-pink-200;
+    }
+
+    img {
+        -webkit-filter: drop-shadow(1px 1px 0 )
+                  drop-shadow(-1px -1px 0 #666);
+        filter: drop-shadow(1px 1px 0 #666) 
+                drop-shadow(-1px -1px 0 #666);
+    }
+
+    #go-back-anchor {
+        @apply flex flex-row items-center justify-center gap-2 w-max py-2 px-4;
+        @apply text-4xl font-bold;
+        @apply text-purple-400 hover:text-purple-800 dark:text-gray-400 dark:hover:text-gray-200 hover:underline;
+        @apply hover:bg-gray-500/20 dark:hover:bg-pink-200/20 rounded-lg;
+    }
+
+</style>
