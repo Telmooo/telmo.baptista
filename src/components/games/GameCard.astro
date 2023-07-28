@@ -1,0 +1,102 @@
+---
+import type { Game } from '../../utils/types';
+
+interface Props extends Game { }
+
+const {
+    title,
+    image,
+    link
+} = Astro.props;
+
+---
+
+<div class="game-card">
+    <div class="game-cover">
+        <img src={`/games/${image}`} alt={`${title} - Cover`}>
+    </div>
+    <div class="game-info">
+        <h3 class="text-red-700 text-5xl text-center">{title}</h3>
+        <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-disabled={link === undefined}
+        >
+            Play Now
+        </a>
+    </div>
+</div>
+
+<style>
+    .game-card {
+        display: grid;
+        grid-template-areas: "single";
+        contain: content;
+        @apply rounded-xl;
+        width: 100%;
+        height: 100%;
+    }
+
+    .game-card > div {
+        grid-area: single;
+    }
+
+    .game-cover {
+        will-change: filter;
+        transition: filter 0.2s ease-in-out;
+        overflow: hidden;
+    }
+    
+    .game-info {
+        display: grid;
+        grid-template-areas: 
+        "title"
+        "dummy"
+        "link";
+        grid-template-rows: min-content 1fr min-content;
+        overflow: hidden;
+        z-index: 1;
+    }
+    
+    .game-info > h3 {
+        grid-area: title;
+        visibility: hidden;
+        opacity: 0;
+        will-change: visibility, opacity;
+        transition: visibility 0s, opacity 0.2s ease-in-out;
+        @apply px-12 py-8 text-center;
+    }
+
+    .game-info > a {
+        grid-area: link;
+        will-change: height;
+        transition: height 0.2s ease-in-out;
+        @apply w-full text-center h-1;
+        @apply bg-gradient-to-r from-rose-400 to-violet-400;
+    }
+
+    .game-card:hover .game-cover,
+    .game-cover:hover {
+        filter: blur(2px);
+    }
+
+    .game-card:hover .game-info > *,
+    .game-cover:hover ~ .game-info > *,
+    .game-info:hover > * {
+         visibility: visible;
+         opacity: 1;
+    }
+
+    .game-card:hover .game-info > *,
+    .game-cover:hover ~ .game-info > *,
+    .game-info:hover > a {
+        @apply h-8;
+    }
+
+    .game-card:hover .game-info,
+    .game-cover:hover ~ .game-info,
+    .game-info:hover {
+        @apply bg-gray-600/50;
+    }
+</style>

@@ -1,0 +1,63 @@
+{
+    "sections": [
+        {
+            "id": 1,
+            "title": "Favourite",
+            "description": "My favourite games of all time.",
+            "games": [
+                {
+                    "title": "NieR: Automata",
+                    "image": "Nier_Automata_Cover.jpg",
+                    "link": "https://store.steampowered.com/app/524220/NieRAutomata/"
+                },
+                {
+                    "title": "Hollow Knight",
+                    "image": "Hollow_Knight_Cover.webp",
+                    "link": "https://store.steampowered.com/app/367520/Hollow_Knight/"
+                },
+                {
+                    "title": "Minecraft (Modded)",
+                    "image": "Minecraft_Cover.png",
+                    "link": "https://www.minecraft.net/en-us/"
+                },
+                {
+                    "title": "Portal 2",
+                    "image": "Portal_2_Cover.jpg",
+                    "link": "https://store.steampowered.com/app/620/Portal_2/"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "title": "Grew up with",
+            "description": "Games I grew up with and are still important to me.",
+            "games": [
+                {
+                    "title": "Ratchet & Clank: Trilogy",
+                    "image": "Ratchet_&_Clank_Trilogy_Cover.jpg"
+                },
+                {
+                    "title": "Ratchet & Clank Future: Tools of Destruction",
+                    "image": "Ratchet_&_Clank_Future_Tools_of_Destruction_Cover.png"
+                },
+                {
+                    "title": "Ratchet & Clank Future: A Crack in Time",
+                    "image": "Ratchet_&_Clank_Future_Crack_in_Time_Cover.jfif"
+                },
+                {
+                    "title": "God of War II",
+                    "image": "God_of_War_2_Cover.jpg"
+                },
+                {
+                    "title": "God of War III",
+                    "image": "God_of_War_3_Cover.jpg"
+                },
+                {
+                    "title": "Mashed",
+                    "image": "Mashed_Cover.jpg",
+                    "link": "https://store.steampowered.com/app/281280/Mashed/"
+                }
+            ]
+        }
+    ]
+}
