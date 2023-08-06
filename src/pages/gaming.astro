@@ -1,0 +1,188 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GameCard from "../components/games/GameCard.astro";
+
+import gamesJson from "../data/games.json";
+import type { GameSection } from "../utils/types";
+
+const games = gamesJson as {
+  sections: GameSection[];
+};
+
+---
+
+<Layout title="Gaming">
+  <div class="flex">
+    <div class="banner-container">
+      <div class="banner">
+        <video muted data-active="false">
+          <source src="/games/Nier_Automata_Banner.webm" type="video/webm">
+          <source src="/games/Nier_Automata_Banner.mp4" type="video/mp4">
+        </video>
+        <video muted data-active="false">
+          <source src="/games/Hollow_Knight_Banner.webm" type="video/webm">
+          <source src="/games/Hollow_Knight_Banner.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <div class="games-content relative max-w-7xl mx-auto py-10 px-6 mt-48 flex flex-col">
+      <div>
+        <h1 class="text-7xl font-bold uppercase mx-4">Games</h1>
+      </div>
+      <div class="mt-8 border-t border-solid border-gray-200 dark:border-gray-700">
+        {
+          games.sections.map((gameSection) => (
+            <section class="my-6 first:my-2">
+              <h2 class="text-4xl font-semibold uppercase">
+                {gameSection.title}
+              </h2>
+              <ul class="section-game-list">
+                {
+                  gameSection.games.map((game) => (
+                    <li>
+                      <GameCard
+                        title={game.title}
+                        image={game.image}
+                        link={game.link}
+                      />
+                    </li>
+                  ))
+                }
+              </ul>
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const bannerContainer = document.querySelector<HTMLDivElement>(".banner-container");
+  const banners = document.querySelectorAll<HTMLVideoElement>(".banner video");
+
+  banners.forEach((banner) => {
+    banner.addEventListener("loadeddata", () => {
+      if (bannerContainer) {
+        bannerContainer.style.height =
+          `${Math.max(bannerContainer.clientHeight, banner.clientHeight)}px`
+      }
+    });
+
+    banner.addEventListener("play", () => {
+      banner.setAttribute("data-active", "true");
+    });
+
+    banner.addEventListener("timeupdate", () => {
+      if (banner.duration - banner.currentTime < 2) {
+        banner.setAttribute("data-active", "false");
+      } else if (banner.currentTime > 8) {
+        banner.setAttribute("data-active", "false");
+
+        if (banner.currentTime > 10) {
+          banner.pause();
+          banner.currentTime = 0;
+        }
+      }
+    });
+
+    // Add event listener on pause or ended
+    ["pause", "ended"].forEach((event) => {
+      banner.addEventListener(event, () => {
+        const nextBanner = banner.nextElementSibling as HTMLVideoElement;
+
+        if (nextBanner) {
+          nextBanner.play();
+        } else {
+          banners[0].play();
+        }
+      });
+    });
+
+  });
+
+  banners[0].play();
+</script>
+<script>
+  const header = document.querySelector<HTMLElement>("header");
+  const bannerContainer = document.querySelector<HTMLDivElement>(".banner-container");
+  const banner = document.querySelector<HTMLDivElement>(".banner");
+
+  
+  document.addEventListener("scroll", () => {
+    const scrollPosition = window.scrollY;
+
+    banner?.scrollTo(0, scrollPosition / 2);
+
+    if (bannerContainer && banner) {
+      const headerHeight = header?.clientHeight || 0;
+      const bannerContainerHeight = bannerContainer.clientHeight;
+      const bannerHeight = banner.clientHeight;
+
+      let position = Math.min(0, bannerContainerHeight - bannerHeight - scrollPosition / 2);
+      if (position < 0) {
+        const adjustedPosition = position + headerHeight;
+        bannerContainer.style.top = `${adjustedPosition}px`;
+      } else {
+        bannerContainer.style.removeProperty("top");
+      }
+    }
+  });
+</script>
+
+<style>
+  .banner-container {
+    width: 100%;
+    position: fixed;
+    height: auto;
+  }
+
+  .banner {
+    display: grid;
+    grid-template-areas: "banner";
+    overflow: hidden;
+    height: 512px;
+    @apply max-w-7xl mx-auto;
+    --mask-size-x: 512px;
+    --mask-size-bottom: 256px;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black var(--mask-size-x),
+      black calc(100% - var(--mask-size-x)),
+      transparent
+    ), linear-gradient(
+      to bottom,
+      black calc(100% - var(--mask-size-bottom)),
+      transparent
+    );
+    mask-size: 100%, 100%;
+    mask-repeat: no-repeat;
+    mask-composite: intersect;
+  }
+
+  .banner video {
+    grid-area: banner;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    will-change: opacity;
+  }
+
+  .banner video[data-active="true"] {
+    opacity: 1;
+  }
+
+  .section-game-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+    @apply gap-8 my-4 px-4;
+    list-style: none;
+  }
+
+  .section-game-list > li {
+    aspect-ratio: 9 / 12;
+  }
+
+</style>
