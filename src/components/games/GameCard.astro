@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon";
+
 import type { Game } from '../../utils/types';
 
 interface Props extends Game { }
@@ -16,14 +18,16 @@ const {
         <img src={`/games/${image}`} alt={`${title} - Cover`}>
     </div>
     <div class="game-info">
-        <h3 class="text-red-700 text-5xl text-center">{title}</h3>
+        <h3>{title}</h3>
         <a
             href={link}
             target="_blank"
             rel="noopener noreferrer"
             aria-disabled={link === undefined}
         >
-            Play Now
+            <span>
+                Details <Icon name="ic:baseline-open-in-new" class="h-4 w-4" />
+            </span>
         </a>
     </div>
 </div>
@@ -33,9 +37,45 @@ const {
         display: grid;
         grid-template-areas: "single";
         contain: content;
-        @apply rounded-xl;
+        border-radius: 4px 16px 16px 0px;
         width: 100%;
         height: 100%;
+        
+        border-bottom: 4px solid transparent;
+        background-color: transparent;
+        background-image: 
+            linear-gradient(
+                to right,
+                rgba(180, 69, 184, 0.2) 0%,
+                rgba(180, 69, 184, 0.6) 20%,
+                rgba(180, 69, 184, 1) 40%,
+                rgba(180, 69, 184, 1) 60%,
+                rgba(180, 69, 184, 0.6) 80%,
+                rgba(180, 69, 184, 0.2) 100%
+            );
+        background-repeat: no-repeat;
+        background-size: 20% 100%;
+        background-position: center;
+        background-origin: border-box;
+        will-change: background-size;
+        transition: background-size 0.2s ease-in-out;
+    }
+
+    :global(.dark-theme) .game-card {
+        background-image: 
+            linear-gradient(
+                to right,
+                rgba(253, 184, 255, 0.2) 0%,
+                rgba(253, 184, 255, 0.6) 20%,
+                rgba(253, 184, 255, 1) 40%,
+                rgba(253, 184, 255, 1) 60%,
+                rgba(253, 184, 255, 0.6) 80%,
+                rgba(253, 184, 255, 0.2) 100%
+            );
+    }
+
+    .game-card:hover {
+        background-size: 100% 100%;
     }
 
     .game-card > div {
@@ -47,33 +87,57 @@ const {
         transition: filter 0.2s ease-in-out;
         overflow: hidden;
     }
-    
-    .game-info {
-        display: grid;
-        grid-template-areas: 
-        "title"
-        "dummy"
-        "link";
-        grid-template-rows: min-content 1fr min-content;
-        overflow: hidden;
-        z-index: 1;
+
+    .game-cover > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
     }
     
-    .game-info > h3 {
-        grid-area: title;
+    .game-info {
+        @apply overflow-hidden;
+        display: grid;
+        grid-template-rows: 60% 40%;
+        z-index: 1;
         visibility: hidden;
         opacity: 0;
-        will-change: visibility, opacity;
-        transition: visibility 0s, opacity 0.2s ease-in-out;
-        @apply px-12 py-8 text-center;
+        will-change: visibility, opacity, background-color;
+        transition: visibility 0s, opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    }
+
+    .game-info > h3 {
+        @apply text-2xl font-semibold whitespace-normal text-gray-300;
+        @apply ml-4 mt-auto mr-auto px-2;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     }
 
     .game-info > a {
-        grid-area: link;
-        will-change: height;
-        transition: height 0.2s ease-in-out;
-        @apply w-full text-center h-1;
-        @apply bg-gradient-to-r from-rose-400 to-violet-400;
+        @apply ml-12 mb-auto mr-auto my-4 rounded-md;
+        @apply text-gray-800 aria-disabled:text-gray-500 aria-disabled:opacity-80;
+        background-color: #fdb8ff;
+    }
+
+    .game-info > a:not([aria-disabled="true"]):hover {
+        @apply text-gray-200 underline font-semibold;
+    }
+
+    .game-info > a > span {
+        @apply flex items-center justify-center gap-1;
+        @apply py-2 px-4 rounded-md;
+        background-image: linear-gradient(#9079d5, #9079d5);
+        background-size: 0% 0%;
+        background-position: center;
+        background-repeat: no-repeat;
+        will-change: background-size;
+        transition: background-size 0.2s ease-in-out;
+
+        width: 100%;
+        height: 100%;
+    }
+
+    .game-info > a:not([aria-disabled="true"]):hover > span {
+        background-size: 100% 100%;
     }
 
     .game-card:hover .game-cover,
@@ -81,22 +145,11 @@ const {
         filter: blur(2px);
     }
 
-    .game-card:hover .game-info > *,
-    .game-cover:hover ~ .game-info > *,
-    .game-info:hover > * {
-         visibility: visible;
-         opacity: 1;
-    }
-
-    .game-card:hover .game-info > *,
-    .game-cover:hover ~ .game-info > *,
-    .game-info:hover > a {
-        @apply h-8;
-    }
-
     .game-card:hover .game-info,
     .game-cover:hover ~ .game-info,
     .game-info:hover {
-        @apply bg-gray-600/50;
+         visibility: visible;
+         opacity: 1;
+         @apply bg-gray-600/50;
     }
 </style>

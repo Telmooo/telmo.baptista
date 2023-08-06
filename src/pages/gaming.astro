@@ -12,42 +12,48 @@ const games = gamesJson as {
 ---
 
 <Layout title="Gaming">
-  <div class="banner-container">
-    <div class="banner">
-      <video muted data-active="false">
-        <source src="/games/Nier_Automata_Banner.webm" type="video/webm">
-        <source src="/games/Nier_Automata_Banner.mp4" type="video/mp4">
-      </video>
-      <video muted data-active="false">
-        <source src="/games/Hollow_Knight_Banner.webm" type="video/webm">
-        <source src="/games/Hollow_Knight_Banner.mp4" type="video/mp4">
-      </video>
+  <div class="flex">
+    <div class="banner-container">
+      <div class="banner">
+        <video muted data-active="false">
+          <source src="/games/Nier_Automata_Banner.webm" type="video/webm">
+          <source src="/games/Nier_Automata_Banner.mp4" type="video/mp4">
+        </video>
+        <video muted data-active="false">
+          <source src="/games/Hollow_Knight_Banner.webm" type="video/webm">
+          <source src="/games/Hollow_Knight_Banner.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
-  </div>
-  <div class="games-content relative max-w-7xl mx-auto py-10 px-6 flex flex-col">
-    <div>
-      <h1 class="text-7xl font-bold uppercase mx-4">Games</h1>
+    <div class="games-content relative max-w-7xl mx-auto py-10 px-6 mt-48 flex flex-col">
+      <div>
+        <h1 class="text-7xl font-bold uppercase mx-4">Games</h1>
+      </div>
+      <div class="mt-8 border-t border-solid border-gray-200 dark:border-gray-700">
+        {
+          games.sections.map((gameSection) => (
+            <section class="my-6 first:my-2">
+              <h2 class="text-4xl font-semibold uppercase">
+                {gameSection.title}
+              </h2>
+              <ul class="section-game-list">
+                {
+                  gameSection.games.map((game) => (
+                    <li>
+                      <GameCard
+                        title={game.title}
+                        image={game.image}
+                        link={game.link}
+                      />
+                    </li>
+                  ))
+                }
+              </ul>
+            </section>
+          ))
+        }
+      </div>
     </div>
-      {
-        games.sections.map((gameSection) => (
-          <section>
-            <h2>{gameSection.title}</h2>
-            <ul class="grid grid-cols-3 gap-4">
-              {
-                gameSection.games.map((game) => (
-                  <li>
-                    <GameCard
-                      title={game.title}
-                      image={game.image}
-                      link={game.link}
-                    />
-                  </li>
-                ))
-              }
-            </ul>
-          </section>
-        ))
-      }
   </div>
 </Layout>
 
@@ -98,7 +104,6 @@ const games = gamesJson as {
   banners[0].play();
 </script>
 <script>
-  // select HTML header tag
   const header = document.querySelector<HTMLElement>("header");
   const bannerContainer = document.querySelector<HTMLDivElement>(".banner-container");
   const banner = document.querySelector<HTMLDivElement>(".banner");
@@ -115,13 +120,6 @@ const games = gamesJson as {
       const bannerHeight = banner.clientHeight;
 
       let position = Math.min(0, bannerContainerHeight - bannerHeight - scrollPosition / 2);
-      console.log({
-        "BANNERCONTAINER": bannerContainer.clientHeight,
-        "BANNER": banner.clientHeight,
-        "SCROLL/2": scrollPosition / 2,
-        "POSITION": position,
-        "ADJUSTED": position + headerHeight,
-      });
       if (position < 0) {
         const adjustedPosition = position + headerHeight;
         bannerContainer.style.top = `${adjustedPosition}px`;
@@ -143,13 +141,29 @@ const games = gamesJson as {
     display: grid;
     grid-template-areas: "banner";
     overflow: hidden;
-    height: 896px;
+    height: 512px;
+    @apply max-w-7xl mx-auto;
+    --mask-size-x: 512px;
+    --mask-size-bottom: 256px;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black var(--mask-size-x),
+      black calc(100% - var(--mask-size-x)),
+      transparent
+    ), linear-gradient(
+      to bottom,
+      black calc(100% - var(--mask-size-bottom)),
+      transparent
+    );
+    mask-size: 100%, 100%;
+    mask-repeat: no-repeat;
+    mask-composite: intersect;
   }
 
   .banner video {
     grid-area: banner;
     width: 100%;
-    height: 100%;
     object-fit: cover;
     opacity: 0;
     transition: opacity 2s ease-in-out;
@@ -158,6 +172,17 @@ const games = gamesJson as {
 
   .banner video[data-active="true"] {
     opacity: 1;
+  }
+
+  .section-game-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+    @apply gap-8 my-4 px-4;
+    list-style: none;
+  }
+
+  .section-game-list > li {
+    aspect-ratio: 9 / 12;
   }
 
 </style>

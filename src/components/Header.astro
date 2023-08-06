@@ -46,9 +46,8 @@ import ThemeSwitcher from "./ThemeSwitcher.astro";
         z-index: 2000;
         @apply shadow;
         @apply shadow-gray-300;
-        background: none;
-        backdrop-filter: saturate(150%) blur(2px);
-        background: hsla(0%, 0%, 100%, 0.8);
+        backdrop-filter: saturate(180%) blur(2px);
+        @apply bg-gray-100/80 dark:bg-gray-900/80;
     }
 
     :global(.dark-theme) header {
